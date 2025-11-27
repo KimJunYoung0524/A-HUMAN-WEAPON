@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A HUMAN WEAPON - IT인공지능 2163027 김준영</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbit&family=Rajdhani:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;700&family=Noto+Serif+KR:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #050505;
+            color: #d4d4d4;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+        
+        .font-cyber { font-family: 'Rajdhani', sans-serif; }
+        .font-cinematic { font-family: 'Noto Serif KR', serif; }
+        .font-script { font-family: 'Noto Sans KR', sans-serif; }
+        
+        .neon-text-blue { text-shadow: 0 0 10px #0a0a0a; color: #188ef5; }
+        .neon-text-red { text-shadow: 0 0 10px #ff003c; color: #ff003c; }
+
+        /* 대본 스타일 */
+        .script-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #0f0f0f;
+            padding: 3rem;
+            border-left: 4px solid #333;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+        
+        .scene-header {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            background: #222;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: 1px solid #444;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+
+        .action-text {
+            font-family: 'Noto Serif KR', serif;
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            text-align: justify;
+            line-height: 1.9;
+        }
+
+        .dialogue-box {
+            margin: 1.5rem 0 1.5rem 3rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid #333;
+        }
+        
+        .char-name {
+            font-weight: 900;
+            display: block;
+            margin-bottom: 0.3rem;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            color: #eee;
+        }
+        
+        .parenthetical {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .dialogue {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        /* 이미지 홀더 */
+        .img-placeholder {
+            width: 100%; height: 300px;
+            background: #000;
+            border: 1px dashed #333;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #555; margin-bottom: 2rem;
+            transition: 0.3s;
+        }
+        .img-placeholder:hover { border-color: #188ef5; color: #188ef5; background-color: #080808; }
+
+        /* 네비게이션 */
+        .nav-link { cursor: pointer; transition: color 0.3s; font-size: 0.9rem; font-weight: bold; }
+        .nav-link:hover { color: #188ef5; }
+
+        /* 스캔라인 */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.03) 50%);
+            background-size: 100% 3px; pointer-events: none; z-index: 9999;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="scanlines"></div>
+
+    <!-- 네비게이션 -->
+    <nav class="fixed w-full z-50 bg-black/95 border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <span class="font-cyber text-2xl font-bold tracking-wider neon-text-blue">A HUMAN WEAPON</span>
+                <div class="hidden md:flex space-x-8 text-gray-400">
+                    <a href="#synopsis" class="nav-link text-white">전체 스토리</a>
+                    <a href="#scenario" class="nav-link text-cyan-400">시나리오(대본)</a>
+                    <a href="#characters" class="nav-link">캐릭터(5인)</a>
+                    <a href="#world" class="nav-link">배경/기획</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 타이틀 -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1574360799797-c8d172772552?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-30">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-black/90"></div>
+        <div class="relative z-10 text-center px-4">
+                       <div class="mb-6 animate-pulse">
+                <span class="text-red-500 font-bold border border-red-900 bg-red-900/20 px-4 py-1 text-xs tracking-[0.5em]">이야기 속으로 떠날 준비 되셨습니까?</span>
+            </div>
+            <h1 class="text-7xl md:text-9xl font-black mb-6 font-cyber tracking-tighter text-white">
+                A HUMAN  <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-600">WEAPON</span>
+            </h1>
+            <p class="text-xl text-gray-400 font-light mb-12">
+                기억을 잃은 병기, 형제를 죽여야 하는 운명<br>
+                <span class="text-white font-bold">2087년, 인간의 존엄을 위한 마지막 프로토콜이 가동된다.</span>
+            </p>
+            <div class="text-sm text-gray-500 font-mono border-t border-gray-800 pt-6 inline-block px-10">
+                 IT인공지능학부 2163027 김준영
+            </div>
+        </div>
+    </header>
+
+  <!-- 1. 풀 스토리 -->
+<section id="synopsis" class="py-24 bg-[#0a0a0a]">
+    <div class="max-w-5xl mx-auto px-6">
+
+       
+        <h2 class="text-4xl font-bold font-cyber text-white mb-8 border-b border-gray-800 pb-4">
+            <span class="neon-text-blue">01.</span> 스토리 구성
+        </h2>
+
+        
+        <div class="space-y-8 text-gray-300 leading-relaxed text-lg font-cinematic">
+
+            
+            <div class="bg-[#111] p-8 border-l-4 border-cyan-500">
+                <h3 class="text-2xl font-bold text-white mb-4 font-cyber">주인공에 대하여..</h3>
+                <p class="mb-4">
+                    카이의 본명은 정유현(21). 저항군 리더 정레온의 동생으로, 맑고 따뜻한 성격의 청년이었다.
+                    기계공학과 신경 인터페이스 연구에 뛰어난 재능이 있었고, 사람들로부터 늘 “똑똑하고 밝다”는 칭찬을 들었다.
+                </p>
+                <p>
+                    하지만 아케론의 인재 스카웃에 속아 연구 단지에 간 날, 유현은 강제로 납치되고 고문당하며
+                    신경계에 기계 칩과 강화 인공근육이 삽입된다.
+                    기억은 순차적으로 삭제되고 전투 알고리즘이 주입되며,
+                    그는 ‘카이’라는 새로운 코드명으로 재탄생한다.
+                    형 레온은 수백 일을 헤매며 동생을 찾지만,
+                    단 하나의 시체도, 기록도 남지 않았기에 누구도 유현의 생존을 믿지 않았다.
+                </p>
+            </div>
+
+            <!-- PART 1 -->
+            <div class="bg-[#111] p-8 border-l-4 border-red-500">
+                <h3 class="text-2xl font-bold text-white mb-4 font-cyber">PART 1: THE AWAKENING (각성)</h3>
+                <p class="mb-4">
+                    2087년 네온 시티. 거대 군사 기업 '아케론'은 인간을 생체 병기로 개조하는 금기의 프로젝트
+                    '하데스 프로그램'을 비밀리에 진행 중이다.
+                    실험체 No.07 '카이'는 기억이 소거된 채 차가운 연구소 배양관에서 눈을 뜬다.
+                    자신의 이름조차 기억하지 못한 채, 왼쪽 팔은 강력한 기계 의수로 대체되어 있었다.
+                </p>
+                <p class="mb-4">
+                    머릿속에 울리는 전술 AI '에코'의 도움으로 카이는 연구소를 탈출하지만,
+                    자신이 누구인지에 대한 해답은 얻지 못한다.
+                </p>
+                <p>
+                    아케론의 이사 베인은 탈주한 카이를 처리하기 위해,
+                    자아가 완전히 제거된 완벽한 살인 기계 '제로(ZERO)'를 가동시킨다.
+                </p>
+            </div>
+
+            <!-- PART 2 -->
+            <div class="bg-[#111] p-8 border-l-4 border-purple-500">
+                <h3 class="text-2xl font-bold text-white mb-4 font-cyber">PART 2: THE TRUTH (진실)</h3>
+                <p class="mb-4">
+                    도심 빈민가로 숨어든 카이는 천재 해커 '리라'와 저항군 리더 '레온'을 만난다.
+                    레온은 카이가 3년 전 시위 도중 실종된 자신의 친동생 '유현'임을 밝힌다.
+                    형제의 감격적인 재회도 잠시, 추적해온 제로가 은신처를 무자비하게 파괴한다.
+                </p>
+                <p>
+                    압도적인 무력 차이로 카이는 패배하고, 레온은 동생을 지키려다 중상을 입는다.
+                    형의 희생을 목격한 카이는 깊은 절망과 분노 속에서 각성한다.
+                    그는 더 이상 도망자가 아닌, 아케론을 무너뜨릴 전사로서 다시 태어나기로 결심한다.
+                </p>
+            </div>
+
+            <!-- PART 3 -->
+            <div class="bg-[#111] p-8 border-l-4 border-red-500">
+                <h3 class="text-2xl font-bold text-white mb-4 font-cyber">PART 3: REVOLUTION (혁명)</h3>
+                <p class="mb-4">
+                    카이는 하데스 프로그램의 메인 서버가 있는 폐공장으로 향한다.
+                    폭우가 쏟아지는 옥상에서 카이와 제로는 최후의 결전을 벌인다.
+                    카이는 뇌가 타버릴 수 있다는 경고를 무시하고 '리미터'를 해제,
+                    인간의 의지로 기계적 한계를 뛰어넘어 제로를 쓰러뜨린다.
+                </p>
+                <p>
+                    아케론의 만행은 세상에 폭로되지만, 카이는 이것이 끝이 아님을 직감한다.
+                    AI 에코는 "더 진화된 오메가 개체가 존재한다"는 경고를 남기고,
+                    카이는 새로운 전쟁을 준비하며 어둠 속으로 사라진다.
+                </p>
+            </div>
+
+        </div> 
+
+    </div> 
+
+    </section>
+
+    <section id="scenario" class="py-24 bg-[#050505] border-t border-gray-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold font-cyber text-white mb-4 text-center"><span class="neon-text-red">02.</span> 시나리오</h2>
+            <p class="text-center text-gray-500 mb-16">상세한 대본은 발표를 위해 주요 장면으로 나뉩니다.</p>
+
+            <div class="script-container">
+                
+                <!-- SCENE 1 -->
+                <div class="scene-header">SCENE #01. THE LAB (각성)</div>
+                <div class="img-placeholder"><i class="fas fa-flask fa-2x mb-2"></i><span class="text-xs">SCENE 1 IMAGE</span></div>
+                <div class="action-text">
+                    INT. ACHERON LAB - NIGHT<br>
+                    칠흑 같은 어둠 속, 푸른 배양액이 가득 찬 유리관. 카이(28)가 산소 마스크를 쓴 채 부유하고 있다.
+                    갑자기 적색 경보등이 켜지며 사이렌이 울린다. 카이의 눈이 번쩍 뜨인다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-cyan-400">ECHO (V.O.)</span>
+                    <span class="dialogue">"심박수 급증. 실험체 07, 각성 프로세스 시작. 카이, 들리나요? 지금 당장 깨어나야 합니다."</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="parenthetical">(유리를 두드리며, 소리 없는 비명)</span>
+                    <span class="dialogue">"여긴 어디지...? 숨을... 쉴 수가 없어!"</span>
+                </div>
+                <div class="action-text">
+                    카이가 자신의 왼쪽 팔을 본다. 살점 대신 차가운 금속 기계 팔이 달려있다. 공포에 질린 그가 기계 팔로 유리벽을 가격한다. 콰앙! 유리가 깨지며 그가 바닥으로 쏟아진다.
+                </div>
+
+                <!-- SCENE 2 -->
+                <div class="scene-header">SCENE #02. THE ESCAPE (탈출)</div>
+                <div class="img-placeholder"><i class="fas fa-running fa-2x mb-2"></i><span class="text-xs">SCENE 2 IMAGE</span></div>
+                <div class="action-text">
+                    INT. CORRIDOR - CONTINUOUS<br>
+                    무장 경비병들이 복도를 달려온다. 젖은 몸으로 비틀거리는 카이.
+                    그의 눈앞에 붉은색 타겟팅 시스템(HUD)이 자동으로 켜진다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-red-500">GUARD</span>
+                    <span class="dialogue">"코드 레드! 실험체 탈주! 사살해! 반복한다, 사살 허가!"</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="parenthetical">(자신의 의지가 아닌 듯 몸이 저절로 움직인다)</span>
+                    <span class="dialogue">"안 돼... 오지 마!"</span>
+                </div>
+                <div class="action-text">
+                    카이의 기계 팔이 순식간에 경비병의 총을 낚아채고 제압한다. 인간을 초월한 반사 신경. 그는 자신의 손을 보며 전율한다.
+                </div>
+
+                <!-- SCENE 3 -->
+                <div class="scene-header">SCENE #03. NEON CITY (낯선 세상)</div>
+                <div class="img-placeholder"><i class="fas fa-city fa-2x mb-2"></i><span class="text-xs">SCENE 3 IMAGE</span></div>
+                <div class="action-text">
+                    EXT. BACK ALLEY - NIGHT<br>
+                    하수구를 통해 밖으로 나온 카이. 눈앞에 펼쳐진 것은 거대한 홀로그램과 산성비가 내리는 디스토피아 '네온 시티'다.
+                    거울 쇼윈도에 비친 자신의 모습은 괴물 같다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="dialogue">"아무것도 기억나지 않아... 내 이름도, 내가 누군지도. 오직 사람을 죽이는 방법만 떠올라."</span>
+                </div>
+
+                <!-- SCENE 4 -->
+                <div class="scene-header">SCENE #04. THE HUNTER (추격자)</div>
+                <div class="img-placeholder"><i class="fas fa-desktop fa-2x mb-2"></i><span class="text-xs">SCENE 4 IMAGE</span></div>
+                <div class="action-text">
+                    INT. ACHERON HQ - NIGHT<br>
+                    아케론의 이사 베인이 모니터를 응시한다. '실험체 07 도주' 경고창이 떠 있다.
+                    그가 책상의 붉은 버튼을 누르자, 지하 격납고에서 검은 관이 열린다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-purple-400">DIRECTOR VANE</span>
+                    <span class="dialogue">"실패작이 쥐새끼처럼 도망쳤군. 제로, 사냥을 시작해라."</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-red-500">ZERO</span>
+                    <span class="parenthetical">(붉은 안광을 빛내며)</span>
+                    <span class="dialogue">"명령 수신. 타겟 07번. 제거 모드 활성화."</span>
+                </div>
+
+                <!-- SCENE 5 -->
+                <div class="scene-header">SCENE #05. THE ENCOUNTER (해커 리라)</div>
+                <div class="img-placeholder"><i class="fas fa-laptop-code fa-2x mb-2"></i><span class="text-xs">SCENE 5 IMAGE</span></div>
+                <div class="action-text">
+                    EXT. SLUMS - NIGHT<br>
+                    추적 드론에게 포위된 카이. 위기의 순간, 주변의 전광판들이 해킹당하며 드론들이 추락한다.
+                    어둠 속에서 AR 고글을 쓴 리라가 나타난다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-white">LIRA</span>
+                    <span class="dialogue">"덩치만 컸지 요령이라곤 없네. 아케론의 보안 코드를 달고 다니면서 숨을 수 있을 줄 알았어?"</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="dialogue">"넌 누구지? 왜 날 도와주는 거야."</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-white">LIRA</span>
+                    <span class="dialogue">"네 머릿속 칩. 그게 우리 '저항군'이 찾던 열쇠니까. 따라와, 살고 싶으면."</span>
+                </div>
+
+                <!-- SCENE 6 -->
+                <div class="scene-header">SCENE #06. THE HIDEOUT (은신처)</div>
+                <div class="img-placeholder"><i class="fas fa-door-open fa-2x mb-2"></i><span class="text-xs">SCENE 6 IMAGE</span></div>
+                <div class="action-text">
+                    INT. RESISTANCE BASE - NIGHT<br>
+                    지하 깊은 곳의 벙커. 리라를 따라 들어선 카이. 안쪽에서 붕대를 감은 남자가 걸어 나온다.
+                    저항군 리더 레온이다. 그는 카이를 보자마자 굳어버린다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-yellow-500">LEON</span>
+                    <span class="parenthetical">(믿을 수 없다는 듯)</span>
+                    <span class="dialogue">"...말도 안 돼. 유현아? 너 유현이 맞지?"</span>
+                </div>
+
+                <!-- SCENE 7 -->
+                <div class="scene-header">SCENE #07. THE TRUTH (형제의 진실)</div>
+                <div class="img-placeholder"><i class="fas fa-hand-holding-heart fa-2x mb-2"></i><span class="text-xs">SCENE 7 IMAGE</span></div>
+                <div class="action-text">
+                    INT. BASE - CONTINUOUS<br>
+                    레온이 떨리는 손으로 3년 전 실종된 동생의 사진을 보여준다. 카이는 두통과 함께 과거의 기억 파편을 본다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-yellow-500">LEON</span>
+                    <span class="dialogue">"3년 전 시위 때 널 잃어버렸어. 놈들이 널 데려가서... 기계로 만든 거야. 미안하다, 형이 널 지키지 못해서."</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="parenthetical">(눈물을 흘리며)</span>
+                    <span class="dialogue">"형...? 내가 유현이라고? 난 살인 기계가 아니었어... 난 사람이었어."</span>
+                </div>
+
+                <!-- SCENE 8 -->
+                <div class="scene-header">SCENE #08. THE AMBUSH (급습)</div>
+                <div class="img-placeholder"><i class="fas fa-bomb fa-2x mb-2"></i><span class="text-xs">SCENE 8 IMAGE</span></div>
+                <div class="action-text">
+                    INT. BASE - NIGHT<br>
+                    콰앙-! 은신처의 강철문이 종잇장처럼 찢겨 나간다. 자욱한 연기 속에서 제로가 걸어 들어온다.
+                    카이가 형을 지키려 달려들지만, 제로의 압도적인 힘에 밀려 나가떨어진다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-red-500">ZERO</span>
+                    <span class="dialogue">"불량품 발견. 즉시 폐기한다."</span>
+                </div>
+                <div class="action-text">
+                    제로의 칼날이 카이를 향하자, 레온이 몸을 던져 대신 칼을 맞는다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-yellow-500">LEON</span>
+                    <span class="dialogue">"도망쳐!! 유현아, 넌 살아야 해! 어서!"</span>
+                </div>
+
+                <!-- SCENE 9 -->
+                <div class="scene-header">SCENE #09. THE DUEL (최후의 결전)</div>
+                <div class="img-placeholder"><i class="fas fa-bolt fa-2x mb-2"></i><span class="text-xs">SCENE 9 IMAGE</span></div>
+                <div class="action-text">
+                    EXT. FACTORY ROOFTOP - RAIN<br>
+                    형의 희생으로 도망친 카이는 복수를 위해 아케론의 공장으로 돌아온다. 폭우 속 옥상에서 카이와 제로가 마주한다.
+                    카이의 의수는 부서져 스파크가 튀고 있다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-red-500">ZERO</span>
+                    <span class="dialogue">"감정은 약점이다. 우린 완벽한 무기가 될 수 있었다."</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="parenthetical">(리미터를 강제로 뜯어내며)</span>
+                    <span class="dialogue">"아니. 우린 부품이 아니야. 나는 선택할 수 있어. 에코, 모든 출력을 개방해! 내 운명은 내가 정한다!!"</span>
+                </div>
+                <div class="action-text">
+                    푸른 에너지가 폭주하며 카이가 빛의 속도로 돌진, 제로의 코어를 꿰뚫는다.
+                </div>
+
+                <!-- SCENE 10 -->
+                <div class="scene-header">SCENE #10. NEW DAWN (새로운 시작)</div>
+                <div class="img-placeholder"><i class="fas fa-sun fa-2x mb-2"></i><span class="text-xs">SCENE 10 IMAGE</span></div>
+                <div class="action-text">
+                    EXT. ROOFTOP - MORNING<br>
+                    비가 그치고 아침 해가 떠오른다. 쓰러진 제로의 붉은 눈빛이 꺼진다.
+                    카이는 형이 준 사진을 손에 쥐고 도시를 내려다본다.
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-cyan-400">ECHO</span>
+                    <span class="dialogue">"아케론의 주가가 폭락하고 있습니다. 하지만... 데이터베이스에 '오메가'라는 또 다른 프로젝트가 있습니다."</span>
+                </div>
+                <div class="dialogue-box">
+                    <span class="char-name text-gray-300">KAI</span>
+                    <span class="dialogue">"알아. 이건 끝이 아니야. 이제 내가 그들을 사냥할 차례다."</span>
+                </div>
+                <div class="action-text">
+                    카이가 망토를 휘날리며 어둠 속으로 사라진다.
+                    [TITLE: A HUMAN WEAPON]
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 캐릭터 & 배경 (5인 + 3배경) -->
+    <section id="characters" class="py-24 bg-[#0a0a0a] border-t border-gray-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title font-cyber text-3xl font-bold text-white mb-10 text-center"><span class="neon-text-blue">03.</span> CHARACTERS & WORLD</h2>
+            
+            <!-- 캐릭터 5인 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="relative h-80 bg-black border border-gray-800 group">
+                    <img src="" class="hidden" alt="KAI"> 
+                    <div class="img-placeholder"><span class="text-xs">KAI 이미지 링크 필요</span></div>
+                    <div class="absolute bottom-0 w-full p-4 bg-black/80">
+                        <h3 class="text-xl font-bold text-white">KAI (주인공)</h3>
+                        <p class="text-gray-400 text-sm">기억을 잃은 병기 / 인간성 회복</p>
+                    </div>
+                </div>
+                <div class="relative h-80 bg-black border border-red-900 group">
+                    <img src="https://i.imgur.com/Bn9iFZz.jpeg" class="w-full h-full object-cover opacity-80" alt="ZERO"> 
+                    <div class="absolute bottom-0 w-full p-4 bg-black/80">
+                        <h3 class="text-xl font-bold text-red-500">ZERO (빌런)</h3>
+                        <p class="text-gray-400 text-sm">완벽한 살인 기계</p>
+                    </div>
+                </div>
+                <div class="relative h-80 bg-black border border-purple-900 group">
+                    <img src="" class="hidden" alt="LIRA">
+                    <div class="img-placeholder"><span class="text-xs">LIRA 이미지 링크 필요</span></div>
+                    <div class="absolute bottom-0 w-full p-4 bg-black/80">
+                        <h3 class="text-xl font-bold text-white">LIRA (조력자)</h3>
+                        <p class="text-gray-400 text-sm">천재 해커</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="relative h-64 bg-black border border-yellow-900 group">
+                    <img src="" class="hidden" alt="LEON">
+                    <div class="img-placeholder"><span class="text-xs">LEON 이미지 링크 필요</span></div>
+                    <div class="absolute bottom-0 w-full p-4 bg-black/80">
+                        <h3 class="text-xl font-bold text-white">LEON (리더)</h3>
+                        <p class="text-yellow-500 text-sm">저항군 리더 / 형</p>
+                    </div>
+                </div>
+                <div class="relative h-64 bg-black border border-blue-900 group">
+                    <img src="" class="hidden" alt="ECHO">
+                    <div class="img-placeholder"><span class="text-xs">ECHO 이미지 링크 필요</span></div>
+                    <div class="absolute bottom-0 w-full p-4 bg-black/80">
+                        <h3 class="text-xl font-bold text-blue-300">ECHO (AI)</h3>
+                        <p class="text-blue-500 text-sm">전술 서포트 AI</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 배경 3종 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="h-48 bg-[#111] border border-gray-800 flex flex-col items-center justify-center p-6 group hover:border-cyan-500 transition">
+                    <i class="fas fa-city text-2xl mb-2 text-gray-600 group-hover:text-cyan-500"></i>
+                    <h4 class="text-white font-bold">1. NEON CITY</h4>
+                    <p class="text-xs text-gray-500">산성비가 내리는 디스토피아</p>
+                </div>
+                <div class="h-48 bg-[#111] border border-gray-800 flex flex-col items-center justify-center p-6 group hover:border-blue-500 transition">
+                    <i class="fas fa-flask text-2xl mb-2 text-gray-600 group-hover:text-blue-500"></i>
+                    <h4 class="text-white font-bold">2. ACHERON LAB</h4>
+                    <p class="text-xs text-gray-500">생체 실험이 자행되는 지하 연구소</p>
+                </div>
+                <div class="h-48 bg-[#111] border border-gray-800 flex flex-col items-center justify-center p-6 group hover:border-red-500 transition">
+                    <i class="fas fa-industry text-2xl mb-2 text-gray-600 group-hover:text-red-500"></i>
+                    <h4 class="text-white font-bold">3. FACTORY</h4>
+                    <p class="text-xs text-gray-500">최후의 결전지, 폐공장</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 영상 기획 -->
+    <section id="assets" class="py-24 bg-[#020202]">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl font-bold font-cyber text-white mb-8 border-b border-gray-800 pb-2"><span class="neon-text-blue">04.</span> VIDEO PLAN</h2>
+            <div class="bg-[#0f0f0f] border border-gray-800 rounded p-6">
+                <table class="w-full text-left text-gray-400 text-sm">
+                    <thead class="text-cyan-500 uppercase font-bold border-b border-gray-700">
+                        <tr><th class="pb-4">Time</th><th class="pb-4">Visual</th><th class="pb-4">Audio</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800">
+                        <tr><td class="py-4">00-15s</td><td>네온 시티 전경 & 카이의 각성</td><td>"그들은 나를 구원했다고 말했다."</td></tr>
+                        <tr><td class="py-4">15-30s</td><td>제로의 등장 & 은신처 폭파</td><td>강렬한 비트 & 폭발음</td></tr>
+                        <tr><td class="py-4">30-50s</td><td>폐공장 결투 & 의수 폭주</td><td>칼 부딪히는 소리 & "내 운명은 내가 정해!"</td></tr>
+                        <tr><td class="py-4">50-60s</td><td>타이틀 로고 & 개봉일</td><td>웅장한 오케스트라 마무리</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-600 text-xs bg-black border-t border-gray-900">
+        <p class="mb-2 font-cyber tracking-widest">A HUMAN WEAPON PROJECT</p>
+        <p>© 2025 Produced by Kim Jun-young.</p>
+    </footer>
+
+</body>
+</html>
