@@ -122,7 +122,53 @@
             background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.03) 50%);
             background-size: 100% 3px; pointer-events: none; z-index: 9999;
         }
-    </style>
+        .cinema-bg img {
+        animation: cinemaZoom 18s ease-out forwards;
+        transform-origin: center;
+    }
+
+    .cinema-lights::before,
+    .cinema-lights::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        opacity: 0.35;
+    }
+
+    .cinema-lights::before {
+        background: radial-gradient(circle at 0% 0%,
+            rgba(255,255,200,0.9) 0%,
+            rgba(255,200,150,0.0) 45%);
+        animation: cinemaLightLeft 8s infinite ease-in-out;
+    }
+
+    .cinema-lights::after {
+        background: radial-gradient(circle at 100% 0%,
+            rgba(255,220,220,0.9) 0%,
+            rgba(255,150,150,0.0) 45%);
+        animation: cinemaLightRight 9s infinite ease-in-out;
+    }
+
+    @keyframes cinemaZoom {
+        0% { transform: scale(1.02); filter: brightness(0.8); }
+        50% { transform: scale(1.08); filter: brightness(1); }
+        100% { transform: scale(1.12); filter: brightness(1.05); }
+    }
+
+    @keyframes cinemaLightLeft {
+        0% { transform: translateX(-20%) translateY(-10%) rotate(-10deg); opacity: 0.25; }
+        50% { transform: translateX(10%) translateY(10%) rotate(5deg); opacity: 0.45; }
+        100% { transform: translateX(-20%) translateY(-5%) rotate(-10deg); opacity: 0.25; }
+    }
+
+    @keyframes cinemaLightRight {
+        0% { transform: translateX(20%) translateY(-5%) rotate(8deg); opacity: 0.3; }
+        50% { transform: translateX(-5%) translateY(15%) rotate(-4deg); opacity: 0.5; }
+        100% { transform: translateX(20%) translateY(-5%) rotate(8deg); opacity: 0.3; }
+    }
+</style>
 </head>
 <body class="antialiased">
     <div class="scanlines"></div>
@@ -146,10 +192,11 @@
 
     <!-- 메인 타이틀 -->
     <header class="relative h-screen flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0">
-        <img src="https://raw.githubusercontent.com/KimJunYoung0524/A-HUMAN-WEAPON/main/CINEMA.jpg"
-             class="w-full h-full object-cover opacity-30">
-    </div>
+<div class="absolute inset-0 cinema-bg">ㄴ
+    <img src="https://raw.githubusercontent.com/KimJunYoung0524/A-HUMAN-WEAPON/main/CINEMA.jpg"
+         class="w-full h-full object-cover opacity-30">
+</div>
+
 
     <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-black/90"></div>
 
