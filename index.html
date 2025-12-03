@@ -745,10 +745,40 @@
         </div>
     </section>
 
+    <div class="text-center my-10">
+      <button id="downloadPDF"
+              class="px-6 py-3 bg-gray-900 text-white rounded-lg text-lg border border-gray-700 hover:bg-gray-800">
+        📄 PDF 다운로드
+      </button>
+    </div>
+
+    <footer class="py-12 text-center text-gray-600 text-xs bg-black border-t border-gray-900">
+        <p class="mb-2 font-cyber tracking-widest">인강병기 프로젝트</p>
+        <p>© 2025 Produced by 김준영</p>
+    </footer>
+
     <footer class="py-12 text-center text-gray-600 text-xs bg-black border-t border-gray-900">
         <p class="mb-2 font-cyber tracking-widest">인간병기 프로젝트</p>
         <p>© 2025 Produced by 김준영</p>
     </footer>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+      document.getElementById("downloadPDF").addEventListener("click", () => {
+        const element = document.body;   // 페이지 전체를 PDF로
+        const options = {
+          filename: 'A-HUMAN-WEAPON.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().from(element).set(options).save();
+      });
+    </script>
+
+</body>
+</html>
 
 </body>
 </html>
